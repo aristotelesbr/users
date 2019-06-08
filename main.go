@@ -2,10 +2,13 @@ package main
 
 import (
 	r "usuarios/routers"
+
+	"github.com/labstack/echo/middleware"
 )
 
 func main() {
 	e := r.App
+	e.Use(middleware.Logger())
 
-	e.Start(":3000")
+	e.Logger.Fatal(e.Start(":3000"))
 }
