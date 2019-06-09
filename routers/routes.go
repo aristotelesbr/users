@@ -1,19 +1,17 @@
 package routers
 
 import (
-	"net/http"
+	"usuarios/controllers"
 
 	"github.com/labstack/echo"
 )
 
+// App is a instance of echo
 var App *echo.Echo
 
 // creata a construction function
 func init() {
 	App = echo.New()
 
-	App.GET("/", home)
-}
-func home(c echo.Context) error {
-	return c.String(http.StatusOK, "Hello, World 2")
+	App.GET("/", controllers.Home)
 }
