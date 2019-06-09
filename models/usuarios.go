@@ -6,7 +6,7 @@ import "usuarios/lib"
 type Usuarios struct {
 	ID    int    `db:"id" json:"id"`
 	Nome  string `db:"nome" json:"nome"`
-	Email string `sb:"email" json:"email"`
+	Email string `db:"email" json:"email"`
 }
 
 // UsuarioModel receiver connection config to connect database
