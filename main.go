@@ -3,7 +3,9 @@ package main
 import (
 	r "usuarios/routers"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/labstack/echo/middleware"
+	_ "upper.io/db.v3"
 )
 
 func main() {
