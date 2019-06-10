@@ -11,8 +11,17 @@ import (
 // Home GET /api/home
 func Home(c echo.Context) error {
 
+	var users []models.Usuarios
+
+	if err := models.UsuarioModel.Find().All(&users); err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]string{
+			"error": "Error ao recuperar os dados",
+		})
+	}
+
 	data := map[string]interface{}{
 		"titulo": "Listagem de usuários",
+		"users":  users,
 	}
 
 	return c.Render(http.StatusOK, "index.html", data)

@@ -16,11 +16,13 @@
       </tr>
       </thead>
       <tbody>
+        {% for user in users %}
         <tr>
-          <td scope="row"></td>
-          <td></td>
-          <td></td>
+          <td>{{user.ID}}</td>
+          <td>{{user.Nome}}</td>
+          <td>{{user.Email}}</td>
         </tr>
+        {% endfor %}
       </tbody>
   </table>
 </div>
