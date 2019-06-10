@@ -10,7 +10,12 @@ import (
 
 // Home GET /api/home
 func Home(c echo.Context) error {
-	return c.String(http.StatusOK, "Hello, World 2")
+
+	data := map[string]interface{}{
+		"titulo": "Listagem de usuários",
+	}
+
+	return c.Render(http.StatusOK, "index.html", data)
 }
 
 // Create POST /v1/create

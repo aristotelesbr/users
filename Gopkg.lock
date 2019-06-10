@@ -10,12 +10,28 @@
   version = "v3.2.0"
 
 [[projects]]
+  digest = "1:434aab943cc1c082c9df36bd4b1f107d9ef4af930d2ce13d3f2eb008df9196f0"
+  name = "github.com/flosch/pongo2"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "5e81b817a0c48c1c57cdf1a9056cf76bdee02ca9"
+  version = "v3.0"
+
+[[projects]]
   digest = "1:ec6f9bf5e274c833c911923c9193867f3f18788c461f76f05f62bb1510e0ae65"
   name = "github.com/go-sql-driver/mysql"
   packages = ["."]
   pruneopts = "UT"
   revision = "72cd26f257d44c1114970e19afddcd812016007e"
   version = "v1.4.1"
+
+[[projects]]
+  branch = "master"
+  digest = "1:60a773be7d907877c354a803fe02fa68554adc5151bc7f880282a0b2c1047b8e"
+  name = "github.com/ikeikeikeike/pongor"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "5cf230f623c7b646ff7dda5d9fdb21fb4ae79521"
 
 [[projects]]
   digest = "1:efd601ad1d1189884f37ed075fadb5bbd17f1f5acf5862827247c6da56d125ba"
@@ -156,7 +172,9 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/flosch/pongo2",
     "github.com/go-sql-driver/mysql",
+    "github.com/ikeikeikeike/pongor",
     "github.com/labstack/echo",
     "github.com/labstack/echo/middleware",
     "upper.io/db.v3",
