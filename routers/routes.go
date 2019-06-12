@@ -15,7 +15,8 @@ func init() {
 
 	App.GET("/", controllers.Home)
 
-	api := App.Group("/v1/")
+	api := App.Group("/v1")
 
-	api.POST("create", controllers.Create)
+	api.POST("/create", controllers.Create)
+	api.DELETE("/delete/:id", controllers.Delete)
 }

@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"net/http"
+	"strconv"
 
 	"usuarios/models"
 
@@ -50,5 +51,29 @@ func Create(c echo.Context) error {
 
 	return c.JSON(http.StatusBadRequest, map[string]string{
 		"message": "Todos os campos devem ser informados.",
+	})
+}
+
+// Delete DELETE /users/:id
+func Delete(c echo.Context) error {
+	userID, _ := strconv.Atoi(c.Param("id"))
+
+	// SLECT * FROM USER usuarios WHERE id= ?
+	result := models.UsuarioModel.Find("id=?", userID)
+
+	if count, _ := result.Count(); count < 1 {
+		return c.JSON(http.StatusNotFound, map[string]string{
+			"message": "Registro não encontrado",
+		})
+	}
+
+	if err := result.Delete(); err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]string{
+			"message": "Erro ao executar a operação!",
+		})
+	}
+
+	return c.JSON(http.StatusAccepted, map[string]string{
+		"message": "Registro excluido com sucesso!",
 	})
 }
