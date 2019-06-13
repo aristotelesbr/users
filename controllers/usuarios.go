@@ -28,6 +28,11 @@ func Home(c echo.Context) error {
 	return c.Render(http.StatusOK, "index.html", data)
 }
 
+// New GET /api/new
+func New(c echo.Context) error {
+	return c.Render(http.StatusOK, "new.html", nil)
+}
+
 // Create POST /v1/create
 func Create(c echo.Context) error {
 	nome := c.FormValue("nome")
@@ -42,11 +47,9 @@ func Create(c echo.Context) error {
 			return c.JSON(http.StatusBadRequest, map[string]string{
 				"message": "Error ao tentar criar um novo cadastro",
 			})
+		} else {
+			return c.Redirect(http.StatusFound, "/")
 		}
-
-		return c.JSON(http.StatusCreated, map[string]string{
-			"message": "Usuário criado com sucesso!",
-		})
 	}
 
 	return c.JSON(http.StatusBadRequest, map[string]string{
