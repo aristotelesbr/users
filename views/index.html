@@ -4,27 +4,51 @@
 
 {% block content %}
 
-<div class="jumbotron mt-5">
-  <h1 class="display-5">Listagem de usuários</h1>
-  <hr class="my-2">
-  <table class="table table-bordered table-inverse table-responsive">
-    <thead class="thead-inverse">
-      <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Email</th>
-      </tr>
-      </thead>
-      <tbody>
-        {% for user in users %}
-        <tr>
-          <td>{{user.ID}}</td>
-          <td>{{user.Nome}}</td>
-          <td>{{user.Email}}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-  </table>
+<div class="container">
+  <div class="jumbotron mt-5">
+    <div class="container">
+      <h1 class="display-5 text-center">Listagem de usuários</h1>
+      <hr class="my-2">
+      <table class="table table-bordered table-responsive">
+        <thead class="thead-inverse">
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Ferramentas</th>
+          </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+            <tr id="user-row-{{user.ID}}">
+              <td>{{user.ID}}</td>
+              <td>{{user.Nome}}</td>
+              <td>{{user.Email}}</td>
+              <td>
+                <a class="btn btn-danger" onclick="deleteUser('{{user.ID}}')">
+                  <i class="fa fa-trash white" style="color:#fff;"></i>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
+{% endblock %}
+
+{% block js %}
+<script>
+  function deleteUser(id) {
+    $.ajax({
+      url: "/v1/delete/" + id,
+      type: "DELETE",
+      success: function() {
+        $("#user-row-" + id).remove()
+      }
+    })
+  }
+</script>
 {% endblock %}
