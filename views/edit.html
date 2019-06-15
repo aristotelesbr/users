@@ -12,7 +12,7 @@
       <form class="form-horizontal" form="role" id="user-form">
         <div class="form-group">
           <label for="nome">Nome do usuário</label>
-          <input type="text" class="form-control" name="nome" id="nome" aria-describedby="user-name" value="{{user.Nome}}">
+          <input type="text" class="form-control" name="nome" id="nome" aria-describedby="user-nome" value="{{user.Nome}}">
           <small id="helpId" class="form-text text-muted">Digite o nome completo do usuário</small>
         </div>
         <div class="form-group">
@@ -32,10 +32,10 @@
     $.ajax({
       url: "/v1/update/" + id,
       dataType: "json",
-      method: "PUT",
+      method: "put",
       data: $("#user-form").serialize(),
-      success: function () {
-        console.log("Registro atualizado");
+      complete: function () {
+        window.location.href = '/';
       }
     })
   }

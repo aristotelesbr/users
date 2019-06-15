@@ -47,9 +47,8 @@ func Create(c echo.Context) error {
 			return c.JSON(http.StatusBadRequest, map[string]string{
 				"message": "Error ao tentar criar um novo cadastro",
 			})
-		} else {
-			return c.Redirect(http.StatusFound, "/")
 		}
+		return c.Redirect(http.StatusFound, "/")
 	}
 
 	return c.JSON(http.StatusBadRequest, map[string]string{
@@ -108,7 +107,7 @@ func Edit(c echo.Context) error {
 // Update UPDATE /users/:id
 func Update(c echo.Context) error {
 	userID, _ := strconv.Atoi(c.Param("id"))
-	name := c.FormValue("name")
+	name := c.FormValue("nome")
 	email := c.FormValue("email")
 
 	var user = models.Usuarios{
@@ -130,5 +129,5 @@ func Update(c echo.Context) error {
 		})
 	}
 
-	return c.JSON(http.StatusFound, "/")
+	return c.JSON(http.StatusAccepted, user)
 }
