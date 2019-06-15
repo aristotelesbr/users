@@ -26,8 +26,11 @@
               <td>{{user.Nome}}</td>
               <td>{{user.Email}}</td>
               <td>
-                <a class="btn btn-danger" onclick="deleteUser('{{user.ID}}')">
+                <button class="btn btn-danger" onclick="deleteUser('{{user.ID}}')">
                   <i class="fa fa-trash white" style="color:#fff;"></i>
+                </button>
+                <a class="btn btn-warning" href="/v1/edit/{{user.ID}}">
+                  <i class="fa fa-pencil" aria-hidden="true" style="color:#fff;"></i>
                 </a>
               </td>
             </tr>

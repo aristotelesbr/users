@@ -20,4 +20,6 @@ func init() {
 	api.GET("/new", controllers.New)
 	api.POST("/create", controllers.Create)
 	api.DELETE("/delete/:id", controllers.Delete)
+	api.GET("/edit/:id", controllers.Edit)
+	api.PUT("/update/:id", controllers.Update)
 }

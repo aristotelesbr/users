@@ -80,3 +80,55 @@ func Delete(c echo.Context) error {
 		"message": "Registro excluido com sucesso!",
 	})
 }
+
+// Edit EDIT /users/id
+func Edit(c echo.Context) error {
+	var userID, _ = strconv.Atoi(c.Param("id"))
+
+	var user models.Usuarios
+
+	result := models.UsuarioModel.Find("id=?", userID)
+
+	if count, _ := result.Count(); count < 1 {
+		return c.JSON(http.StatusNotFound, map[string]string{
+			"message": "Usuário não encontrado",
+		})
+	}
+	if err := result.One(&user); err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]string{
+			"message": "Usuário não encontrado",
+		})
+	}
+	var data = map[string]interface{}{
+		"user": user,
+	}
+	return c.Render(http.StatusOK, "edit.html", data)
+}
+
+// Update UPDATE /users/:id
+func Update(c echo.Context) error {
+	userID, _ := strconv.Atoi(c.Param("id"))
+	name := c.FormValue("name")
+	email := c.FormValue("email")
+
+	var user = models.Usuarios{
+		ID:    userID,
+		Nome:  name,
+		Email: email,
+	}
+	result := models.UsuarioModel.Find("id=?", userID)
+
+	if count, _ := result.Count(); count < 1 {
+		c.JSON(http.StatusNotFound, map[string]string{
+			"message": "Usuário não encontrado!",
+		})
+	}
+
+	if err := result.Update(user); err != nil {
+		c.JSON(http.StatusBadRequest, map[string]string{
+			"message": "Houve um erro, por favor tente novamente mais tarde",
+		})
+	}
+
+	return c.JSON(http.StatusFound, "/")
+}
